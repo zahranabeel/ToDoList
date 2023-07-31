@@ -11,15 +11,15 @@ const AddToDoList = () => {
     const addTask = () => {
         if (newTask.trim() !== '') {
             if (editIndex !== null) {
-              const updatedTasks = [...tasks];
-              updatedTasks[editIndex].text = newTask;
-              setTasks(updatedTasks);
-              setEditIndex(null);
+                const updatedTasks = [...tasks];
+                updatedTasks[editIndex].text = newTask;
+                setTasks(updatedTasks);
+                setEditIndex(null);
             } else {
-              setTasks([...tasks, { text: newTask, completed: false }]);
+                setTasks([...tasks, { text: newTask, completed: false }]);
             }
             setNewTask('');
-          }
+        }
     };
 
     // Load tasks from local storage on initial render
@@ -47,9 +47,12 @@ const AddToDoList = () => {
                     className="button"
                     onClick={() => addTask()}>+</button>
 
+                <br />
+                <p>Total tasks remaining: {tasks.filter((task) => !task.completed).length}</p>
+
                 <ol>
                     {tasks.map((task, index) => {
-                        return <DisplayToDoList key={index} task={task} index={index} setTasks={setTasks} tasks = {tasks} setNewTask = {setNewTask} setEditIndex = {setEditIndex}/>
+                        return <DisplayToDoList key={index} task={task} index={index} setTasks={setTasks} tasks={tasks} setNewTask={setNewTask} setEditIndex={setEditIndex} />
                     })}
                 </ol>
             </div>
